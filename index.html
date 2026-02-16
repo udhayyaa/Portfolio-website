@@ -35,7 +35,7 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 35%;
+            width: 24%;
             height: 100vh;
             background: var(--secondary-bg);
             color: var(--text-dark);
@@ -57,21 +57,22 @@
         }
 
         .profile-pic {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            flex-shrink: 0;
         }
 
         .profile-name {
             font-family: 'Inter', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .social-links {
@@ -118,11 +119,15 @@
 
         .pricing {
             margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
         .pricing-text {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            margin-bottom: 0;
         }
 
         .pricing-text strong {
@@ -134,7 +139,8 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.85rem;
-            color: #4ade80;
+            color: var(--text-secondary);
+            white-space: nowrap;
         }
 
         .availability::before {
@@ -142,7 +148,7 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #4ade80;
+            background: #05DF72;
             animation: pulse 2s infinite;
         }
 
@@ -164,22 +170,20 @@
             font-weight: 600;
             border-radius: 4px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease;
             font-family: 'Inter', sans-serif;
-            box-shadow: 0 0 0 1px rgba(0, 107, 223, 0.8);
+            width: 100%;
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 0 1px rgba(0, 107, 223, 0.8),
-                        0 8px 20px rgba(0, 122, 255, 0.3);
+            opacity: 0.9;
         }
 
         /* Client Logos - Bottom of Sidebar */
         .clients-section {
             margin-top: auto;
             padding-top: 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -224,7 +228,7 @@
 
         /* Right Content Area - Scrollable */
         .content {
-            margin-left: 35%;
+            margin-left: 24%;
             min-height: 100vh;
             padding: 3rem;
         }
@@ -317,10 +321,10 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .sidebar {
-                width: 40%;
+                width: 30%;
             }
             .content {
-                margin-left: 40%;
+                margin-left: 30%;
             }
         }
 
