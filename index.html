@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon"
+        href="https://res.cloudinary.com/deznuknel/image/upload/v1771585959/logo_rvyb26.png">
     <style>
         :root {
             --primary-bg: #0a0a0a;
@@ -46,27 +49,36 @@
         }
 
         .sidebar-header {
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
         .profile {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
             margin-bottom: 0;
         }
 
         .profile-pic {
             width: 32px;
             height: 32px;
-            border-radius: 6px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
-            font-weight: 600;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        span img {
+            height: 1.75rem;
+            width: auto;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-name {
@@ -100,33 +112,29 @@
 
         .tagline {
             font-family: 'Inter', sans-serif;
-            font-size: 18px;
+            font-size: 15px;
             line-height: 1.6;
             font-weight: 500;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             letter-spacing: 0;
             color: var(--text-dark);
         }
 
         .description {
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.6;
             font-weight: 400;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
 
         .pricing {
             margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
         }
 
         .pricing-text {
-            font-size: 1rem;
+            font-size: 15px;
             margin-bottom: 0;
         }
 
@@ -134,28 +142,13 @@
             font-weight: 600;
         }
 
-        .availability {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-        }
-
-        .availability::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #05DF72;
-            animation: pulse 2s infinite;
-        }
-
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
+
             50% {
                 opacity: 0.5;
             }
@@ -165,7 +158,7 @@
             background: var(--accent-blue);
             color: var(--text-primary);
             border: none;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             font-size: 1rem;
             font-weight: 600;
             border-radius: 4px;
@@ -198,7 +191,7 @@
 
         .clients-marquee {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             animation: scroll 20s linear infinite;
             width: fit-content;
         }
@@ -221,6 +214,7 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
@@ -255,10 +249,21 @@
             opacity: 1;
         }
 
-        .work-item:nth-child(1) { animation-delay: 0.1s; }
-        .work-item:nth-child(2) { animation-delay: 0.2s; }
-        .work-item:nth-child(3) { animation-delay: 0.3s; }
-        .work-item:nth-child(4) { animation-delay: 0.4s; }
+        .work-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .work-item:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .work-item:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .work-item:nth-child(4) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes fadeInUp {
             to {
@@ -269,7 +274,7 @@
 
         .work-image {
             width: 100%;
-            height: 600px;
+            height: auto;
             position: relative;
             overflow: hidden;
             transition: transform 0.4s ease;
@@ -277,7 +282,7 @@
 
         .work-image img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
             display: block;
         }
@@ -319,12 +324,57 @@
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .sidebar {
-                width: 30%;
+                width: 32%;
+                padding: 2.5rem 2rem;
             }
+
             .content {
-                margin-left: 30%;
+                margin-left: 32%;
+                padding: 2.5rem 2rem;
+            }
+
+            .tagline {
+                font-size: 16px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 968px) {
+            .sidebar {
+                width: 38%;
+                padding: 2rem 1.5rem;
+            }
+
+            .content {
+                margin-left: 38%;
+                padding: 2rem 1.5rem;
+            }
+
+            .tagline {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .pricing-text {
+                font-size: 0.9rem;
+            }
+
+            .cta-button {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .work-image {
+                height: 450px;
             }
         }
 
@@ -335,15 +385,26 @@
                 height: auto;
                 padding: 2rem 1.5rem;
             }
+
             .content {
                 margin-left: 0;
                 padding: 2rem 1.5rem;
             }
+
             .clients-marquee {
                 animation: scroll 15s linear infinite;
             }
+
             .tagline {
-                font-size: 1.5rem;
+                font-size: 16px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .work-image {
+                height: 400px;
             }
         }
 
@@ -366,41 +427,59 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Fixed Left Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
             <div class="profile">
-                <div class="profile-pic">U</div>
+                <div class="profile-pic">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771585959/logo_rvyb26.png"
+                        alt="Udhaya Logo">
+                </div>
                 <div class="profile-name">Udhaya</div>
                 <div class="social-links">
-                    <a href="#" target="_blank">Twitter(x)</a>
-                    <a href="#" target="_blank">Email</a>
+                    <a href="https://x.com/Udhayya_" target="_blank">Twitter(x)</a>
+                    <a href="mailto:udhayaseelan.n@gmail.com" target="_blank">Email</a>
                 </div>
             </div>
         </div>
 
         <div class="sidebar-content">
-            <h1 class="tagline">Design partner for B2B and AI products, turning messy workflows into systems teams can trust.</h1>
-            
-            <p class="description">From early validation to funded scale, product design, landing pages, and marketing assets built for momentum.</p>
-            
+            <h1 class="tagline">Design partner for B2B and AI products, turning messy workflows into systems teams can
+                trust.</h1>
+
+            <p class="description">From early validation to funded scale, product design, landing pages, and marketing
+                assets built for momentum.</p>
+
             <div class="pricing">
                 <p class="pricing-text">Retainers start at <strong>$2,500/month</strong></p>
-                <span class="availability">2 partnerships available</span>
             </div>
 
-            <button class="cta-button" onclick="window.location.href='#contact'">Book a strategy call</button>
+            <button class="cta-button" onclick="window.location.href='https://calendar.app.google/hW8mHMJVUiTtNfb67'">Book a strategy call</button>
         </div>
 
         <div class="clients-section">
             <div class="clients-label">Trusted by</div>
             <div class="clients-marquee">
-                <span class="client-logo">ibizo</span>
-                <span class="client-logo">BREATHE ESG</span>
-                <span class="client-logo">compuz</span>
-                <span class="client-logo">Cloudify</span>
-                <span class="client-logo">.cek</span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225143_qzvbol.png"
+                        alt="ibizo"></span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225144_lgaqqi.png"
+                        alt="BREATHE ESG"></span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225145_cxiteh.png"
+                        alt="compuz"></span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225146_vwymfx.png"
+                        alt="Cloudify"></span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225147_vlcaic.png"
+                        alt="celetel"></span>
+                <span class="client-logo"><img
+                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225148_tgw7nt.png"
+                        alt="nano"></span>
                 <!-- Duplicate for seamless loop -->
                 <span class="client-logo">ibizo</span>
                 <span class="client-logo">BREATHE ESG</span>
@@ -417,48 +496,126 @@
             <!-- Work Item 1 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&h=800&fit=crop" alt="Modern workspace setup">
-                    <div class="work-overlay">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239680_tcr07t.png"
+                        alt="Breathe esg">
+                    <!-- <div class="work-overlay">
                         <p class="work-category">Financial Technology</p>
                         <h2 class="work-title">AI-Powered Finance Manager</h2>
-                        <p class="work-description">Transforming personal finance through intelligent spending analysis and automated savings recommendations.</p>
-                    </div>
+                        <p class="work-description">Transforming personal finance through intelligent spending analysis
+                            and automated savings recommendations.</p>
+                    </div> -->
                 </div>
             </article>
 
             <!-- Work Item 2 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop" alt="Data visualization dashboard">
-                    <div class="work-overlay">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239679_fsngij.png"
+                        alt="AI chat mobile">
+                    <!-- <div class="work-overlay">
                         <p class="work-category">B2B SaaS Dashboard</p>
                         <h2 class="work-title">Analytics Platform</h2>
-                        <p class="work-description">Enterprise data visualization dashboard helping teams make data-driven decisions with real-time insights.</p>
-                    </div>
+                        <p class="work-description">Enterprise data visualization dashboard helping teams make
+                            data-driven decisions with real-time insights.</p>
+                    </div> -->
                 </div>
             </article>
 
             <!-- Work Item 3 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop" alt="Mobile app interface">
-                    <div class="work-overlay">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239681_apnvus.png"
+                        alt="Claritas home screen">
+                    <!-- <div class="work-overlay">
                         <p class="work-category">Mobile Application</p>
                         <h2 class="work-title">Productivity Suite</h2>
-                        <p class="work-description">Streamlined mobile experience for managing tasks, projects, and team collaboration on the go.</p>
-                    </div>
+                        <p class="work-description">Streamlined mobile experience for managing tasks, projects, and team
+                            collaboration on the go.</p>
+                    </div> -->
                 </div>
             </article>
 
             <!-- Work Item 4 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop" alt="Business charts and graphs">
-                    <div class="work-overlay">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588745/Frame_2147239688_pa0jtg.png"
+                        alt="Inara chat screen">
+                    <!-- <div class="work-overlay">
                         <p class="work-category">Data Visualization</p>
                         <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their carbon footprint with clear metrics.</p>
-                    </div>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
+                </div>
+            </article>
+
+            <!-- Work Item 5 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239683_umdodx.png"
+                        alt="VR tourism mobile ">
+                    <!-- <div class="work-overlay">
+                        <p class="work-category">Data Visualization</p>
+                        <h2 class="work-title">ESG Emissions Tracking</h2>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
+                </div>
+            </article>
+
+            <!-- Work Item 6 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239689_xtfhtr.png"
+                        alt="Payment OS screen">
+                    <!-- <div class="work-overlay">
+                        <p class="work-category">Data Visualization</p>
+                        <h2 class="work-title">ESG Emissions Tracking</h2>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
+                </div>
+            </article>
+
+            <!-- Work Item 7 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588745/Frame_2147239690_yadqzd.png"
+                        alt="AWS screen">
+                    <!-- <div class="work-overlay">
+                        <p class="work-category">Data Visualization</p>
+                        <h2 class="work-title">ESG Emissions Tracking</h2>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
+                </div>
+            </article>            
+            
+            <!-- Work Item 8 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239687_zmz4mi.png"
+                        alt="Claritas timeline">
+                    <!-- <div class="work-overlay">
+                        <p class="work-category">Data Visualization</p>
+                        <h2 class="work-title">ESG Emissions Tracking</h2>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
+                </div>
+            </article>            
+            
+            <!-- Work Item 9 -->
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239691_xaa8i6.png"
+                        alt="Zero screen">
+                    <!-- <div class="work-overlay">
+                        <p class="work-category">Data Visualization</p>
+                        <h2 class="work-title">ESG Emissions Tracking</h2>
+                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
+                            carbon footprint with clear metrics.</p>
+                    </div> -->
                 </div>
             </article>
         </div>
@@ -508,4 +665,5 @@
         });
     </script>
 </body>
+
 </html>
