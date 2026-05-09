@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon"
-        href="https://res.cloudinary.com/deznuknel/image/upload/v1771585959/logo_rvyb26.png">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png"
+        href="https://res.cloudinary.com/deznuknel/image/upload/w_64,h_64,c_fill,g_face,r_max/v1778222770/new_website_dp_twwgui.png">
     <style>
         :root {
             --primary-bg: #0a0a0a;
@@ -28,7 +29,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             background: var(--secondary-bg);
             overflow-x: hidden;
         }
@@ -44,34 +45,22 @@
             color: var(--text-dark);
             display: flex;
             flex-direction: column;
-            padding: 3rem 2.5rem;
+            padding: 2rem 2.5rem;
             z-index: 100;
         }
 
         .sidebar-header {
-            margin-bottom: 2rem;
-        }
-
-        .profile {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0;
+            margin-bottom: 0.75rem;
         }
 
         .profile-pic {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 48px;
+            height: 48px;
             flex-shrink: 0;
-            overflow: hidden;
         }
 
         span img {
-            height: 1.75rem;
+            height: 1.25rem;
             width: auto;
         }
 
@@ -81,29 +70,22 @@
             object-fit: cover;
         }
 
-        .profile-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
         .social-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.25rem;
             font-size: 0.9rem;
-            opacity: 0.6;
-            margin-left: auto;
+            margin-bottom: 1.5rem;
         }
 
         .social-links a {
             color: var(--text-secondary);
             text-decoration: none;
+            font-weight: 400;
             transition: opacity 0.3s ease;
         }
 
         .social-links a:hover {
-            opacity: 1;
-            color: var(--text-dark);
+            opacity: 0.6;
         }
 
         .sidebar-content {
@@ -111,8 +93,8 @@
         }
 
         .tagline {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
             line-height: 1.6;
             font-weight: 500;
             margin-bottom: 1rem;
@@ -121,8 +103,8 @@
         }
 
         .description {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
             line-height: 1.6;
             font-weight: 400;
             color: var(--text-secondary);
@@ -134,7 +116,7 @@
         }
 
         .pricing-text {
-            font-size: 15px;
+            font-size: 14px;
             margin-bottom: 0;
         }
 
@@ -155,22 +137,29 @@
         }
 
         .cta-button {
-            background: var(--accent-blue);
-            color: var(--text-primary);
+            background: #007AFF;
+            color: #fff;
             border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 4px;
+            padding: 0.85rem 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 12px;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            font-family: 'Inter', sans-serif;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-family: 'Geist', sans-serif;
             width: 100%;
+            letter-spacing: 0.01em;
+            box-shadow: inset 0 1px 6px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 122, 255, 0.2);
         }
 
         .cta-button:hover {
             transform: translateY(-2px);
-            opacity: 0.9;
+            box-shadow: inset 0 1px 8px rgba(255, 255, 255, 0.35), 0 8px 24px rgba(0, 122, 255, 0.3), 0 4px 8px rgba(0, 122, 255, 0.15);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+            box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 122, 255, 0.15);
         }
 
         /* Client Logos - Bottom of Sidebar */
@@ -181,24 +170,25 @@
         }
 
         .clients-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            opacity: 0.5;
-            margin-bottom: 1rem;
+            opacity: 0.4;
+            margin-bottom: 0.75rem;
             color: var(--text-dark);
         }
 
         .clients-marquee {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             animation: scroll 20s linear infinite;
             width: fit-content;
+            align-items: center;
         }
 
         .client-logo {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 0.85rem;
             font-weight: 600;
             opacity: 0.7;
             white-space: nowrap;
@@ -224,17 +214,18 @@
         .content {
             margin-left: 24%;
             min-height: 100vh;
-            padding: 3rem;
+            padding: 1rem;
+            background: #FAF8F2;
         }
 
         .work-grid {
             display: grid;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .work-item {
             position: relative;
-            border-radius: 12px;
+            border-radius: 0;
             overflow: hidden;
             /* cursor: pointer; */
             animation: fadeInUp 0.6s ease forwards;
@@ -299,7 +290,7 @@
         }
 
         .work-category {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -308,7 +299,7 @@
         }
 
         .work-title {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             color: #ffffff;
@@ -317,7 +308,7 @@
         }
 
         .work-description {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist', sans-serif;
             font-size: 1rem;
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.8);
@@ -332,7 +323,7 @@
 
             .content {
                 margin-left: 32%;
-                padding: 2.5rem 2rem;
+                padding: 1rem;
             }
 
             .tagline {
@@ -352,11 +343,15 @@
 
             .content {
                 margin-left: 38%;
-                padding: 2rem 1.5rem;
+                padding: 0.5rem;
+            }
+
+            .work-grid {
+                gap: 0.5rem;
             }
 
             .tagline {
-                font-size: 15px;
+                font-size: 14px;
                 line-height: 1.5;
             }
 
@@ -369,13 +364,10 @@
             }
 
             .cta-button {
-                padding: 0.875rem 1.5rem;
-                font-size: 0.9rem;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.85rem;
             }
 
-            .work-image {
-                height: 450px;
-            }
         }
 
         @media (max-width: 768px) {
@@ -388,7 +380,15 @@
 
             .content {
                 margin-left: 0;
-                padding: 2rem 1.5rem;
+                padding: 0.25rem;
+            }
+
+            .work-grid {
+                gap: 0.25rem;
+            }
+
+            .work-item {
+                border-radius: 0;
             }
 
             .clients-marquee {
@@ -403,9 +403,6 @@
                 font-size: 14px;
             }
 
-            .work-image {
-                height: 400px;
-            }
         }
 
         /* Custom Scrollbar */
@@ -432,35 +429,31 @@
     <!-- Fixed Left Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <div class="profile">
-                <div class="profile-pic">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771585959/logo_rvyb26.png"
-                        alt="Udhaya Logo">
-                </div>
-                <div class="profile-name">Udhaya</div>
-                <div class="social-links">
-                    <a href="https://x.com/Udhayya_" target="_blank">Twitter(x)</a>
-                    <a href="mailto:udhayaseelan.n@gmail.com" target="_blank">Email</a>
-                </div>
+            <div class="profile-pic">
+                <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778222770/new_website_dp_twwgui.png"
+                    alt="Udhaya">
             </div>
         </div>
 
         <div class="sidebar-content">
-            <h1 class="tagline">Design partner for B2B and AI products, turning messy workflows into systems teams can
-                trust.</h1>
+            <h1 class="tagline">I'm Udhaya, product designer partner for early stage B2B & AI Product</h1>
 
-            <p class="description">From early validation to funded scale, product design, landing pages, and marketing
-                assets built for momentum.</p>
+            <p class="description">I've spent more time understanding complex systems and the people inside them than polishing interfaces.</p>
 
-            <div class="pricing">
-                <p class="pricing-text" style="display:none">Retainers start at <strong>$3,800/month</strong></p>
+            <p class="description">I work closely with engineers to make sure designs are buildable from the start and look the same when they ship.</p>
+
+            <p class="description">Product design, landing pages, and GTM assets for early teams who move fast</p>
+
+            <div class="social-links">
+                <a href="https://x.com/Udhayya_" target="_blank">Twitter</a>
+                <a href="https://www.linkedin.com/in/udhaya-705b081a1/" target="_blank">Linkedin</a>
             </div>
 
-            <button class="cta-button" onclick="window.location.href='https://calendar.app.google/hW8mHMJVUiTtNfb67'">Book a strategy call</button>
+            <button class="cta-button" data-cal-link="udhaya/30min" data-cal-config='{"layout":"month_view"}'>Book a free strategy call</button>
         </div>
 
         <div class="clients-section">
-            <div class="clients-label">Trusted by</div>
+            <div class="clients-label">Worked with</div>
             <div class="clients-marquee">
                 <span class="client-logo"><img
                         src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225143_qzvbol.png"
@@ -493,131 +486,90 @@
     <!-- Scrollable Right Content -->
     <main class="content">
         <div class="work-grid">
-            <!-- Work Item 1 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239680_tcr07t.png"
-                        alt="Breathe esg">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Financial Technology</p>
-                        <h2 class="work-title">AI-Powered Finance Manager</h2>
-                        <p class="work-description">Transforming personal finance through intelligent spending analysis
-                            and automated savings recommendations.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333111/Desktop_-_35_nae7wn.png"
+                        alt="Claritas — Action items dashboard">
                 </div>
             </article>
 
-            <!-- Work Item 2 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239679_fsngij.png"
-                        alt="AI chat mobile">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">B2B SaaS Dashboard</p>
-                        <h2 class="work-title">Analytics Platform</h2>
-                        <p class="work-description">Enterprise data visualization dashboard helping teams make
-                            data-driven decisions with real-time insights.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333708/Frame_214787240075_zsqogh.png"
+                        alt="Breathe ESG — Vault file manager">
                 </div>
             </article>
 
-            <!-- Work Item 3 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588744/Frame_2147239681_apnvus.png"
-                        alt="Claritas home screen">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Mobile Application</p>
-                        <h2 class="work-title">Productivity Suite</h2>
-                        <p class="work-description">Streamlined mobile experience for managing tasks, projects, and team
-                            collaboration on the go.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778336721/Desktop_-_52_po7gel.png"
+                        alt="Breathe ESG — Multi million dollar funding round">
                 </div>
             </article>
 
-            <!-- Work Item 4 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588745/Frame_2147239688_pa0jtg.png"
-                        alt="Inara chat screen">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/65375634575473_zcpcot.png"
+                        alt="Approve — Approvals landing page">
                 </div>
             </article>
 
-            <!-- Work Item 5 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239683_umdodx.png"
-                        alt="VR tourism mobile ">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/Cosmic_576648night_kbnrp2.png"
+                        alt="Fynlo — Vendor payments dashboard">
                 </div>
             </article>
 
-            <!-- Work Item 6 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239689_xtfhtr.png"
-                        alt="Payment OS screen">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339085/67747647_qgzvix.png"
+                        alt="Approve — Purchase requests dashboard">
                 </div>
             </article>
 
-            <!-- Work Item 7 -->
             <article class="work-item">
                 <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588745/Frame_2147239690_yadqzd.png"
-                        alt="AWS screen">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
-                </div>
-            </article>            
-            
-            <!-- Work Item 8 -->
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239687_zmz4mi.png"
-                        alt="Claritas timeline">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
-                </div>
-            </article>            
-            
-            <!-- Work Item 9 -->
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1771588746/Frame_2147239691_xaa8i6.png"
-                        alt="Zero screen">
-                    <!-- <div class="work-overlay">
-                        <p class="work-category">Data Visualization</p>
-                        <h2 class="work-title">ESG Emissions Tracking</h2>
-                        <p class="work-description">Sustainability dashboard helping companies monitor and reduce their
-                            carbon footprint with clear metrics.</p>
-                    </div> -->
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339086/Instagram_post_-_53_z8n1jw.png"
+                        alt="AI CFO — Mobile finance assistant">
                 </div>
             </article>
+
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339927/Desktop_-6_45_ms3o5r.png"
+                        alt="Momentum — Sales inbox landing page">
+                </div>
+            </article>
+
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339474/Frame_2147e239263_znjgpd.png"
+                        alt="Breathe ESG — Emissions overview dashboard">
+                </div>
+            </article>
+
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339475/Frame_21472y39641_jhwtp2.png"
+                        alt="Breathe Zero — CO2 emissions dashboard">
+                </div>
+            </article>
+
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339476/Desktop_-_5_1_w6qeba.png"
+                        alt="Breathe ESG — Gap analysis with Inara AI">
+                </div>
+            </article>
+
+            <article class="work-item">
+                <div class="work-image">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778340369/Instagram_poswwwt_-_102333_c9bdl5.png"
+                        alt="Mobile apps — CFO, Sales dashboard & Pipeline analytics">
+                </div>
+            </article>
+
         </div>
     </main>
 
@@ -636,14 +588,7 @@
             });
         });
 
-        // Pause marquee on hover
         const marquee = document.querySelector('.clients-marquee');
-        marquee.addEventListener('mouseenter', () => {
-            marquee.style.animationPlayState = 'paused';
-        });
-        marquee.addEventListener('mouseleave', () => {
-            marquee.style.animationPlayState = 'running';
-        });
 
         // Add intersection observer for scroll animations
         const observerOptions = {
@@ -663,6 +608,13 @@
         document.querySelectorAll('.work-item').forEach(item => {
             observer.observe(item);
         });
+    </script>
+
+    <!-- Cal.com embed -->
+    <script type="text/javascript">
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", { origin: "https://cal.com" });
+        Cal("ui", { styles: { branding: { brandColor: "#007AFF" } }, hideEventTypeDetails: false, layout: "month_view" });
     </script>
 </body>
 
