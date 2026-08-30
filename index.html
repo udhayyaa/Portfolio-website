@@ -7,19 +7,19 @@
     <title>Udhaya - Product Designer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png"
         href="https://res.cloudinary.com/deznuknel/image/upload/w_64,h_64,c_fill,g_face,r_max/v1778222770/new_website_dp_twwgui.png">
     <style>
         :root {
-            --primary-bg: #0a0a0a;
-            --secondary-bg: #FFFDF7;
-            --accent-yellow: #FFD23F;
+            --outer-bg: #FAF8F2;
+            --panel-bg: #FFFDF7;
             --accent-blue: #007AFF;
-            --text-primary: #ffffff;
             --text-secondary: #475569;
             --text-dark: #0F172A;
+            --nav-active: #EDEBE3;
+            --placeholder: #FAF8F2;
+            --nav-muted: #475569;
         }
 
         * {
@@ -30,23 +30,106 @@
 
         body {
             font-family: 'Geist', sans-serif;
-            background: var(--secondary-bg);
-            overflow-x: hidden;
+            background: var(--outer-bg);
+            color: var(--text-dark);
+            overflow: hidden;
+            height: 100vh;
         }
 
-        /* Left Sidebar - Fixed */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 24%;
+        .page {
             height: 100vh;
-            background: var(--secondary-bg);
-            color: var(--text-dark);
             display: flex;
             flex-direction: column;
-            padding: 2rem 2.5rem;
-            z-index: 100;
+            padding: 0.75rem;
+            gap: 0.5rem;
+        }
+
+        /* Top nav — outside the content shell, on the outer fill */
+        .site-nav {
+            position: relative;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.25rem;
+            flex-shrink: 0;
+            padding: 0.15rem 0.35rem 0;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.45rem 0.75rem;
+            border-radius: 6px;
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--nav-muted);
+            text-decoration: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-link.active {
+            background: var(--nav-active);
+            color: var(--text-dark);
+        }
+
+        .nav-icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .nav-icon svg {
+            width: 14px;
+            height: 14px;
+            display: block;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .view.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .view[hidden] {
+            display: none !important;
+        }
+
+        /* —— Home: one shell, left + right —— */
+        .home-shell {
+            display: grid;
+            grid-template-columns: minmax(280px, 28%) 1fr;
+            gap: 0;
+            flex: 1;
+            min-height: 0;
+            background: var(--panel-bg);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 2.25rem;
+            height: 100%;
+            overflow: hidden;
+            background: var(--panel-bg);
         }
 
         .sidebar-header {
@@ -57,11 +140,8 @@
             width: 48px;
             height: 48px;
             flex-shrink: 0;
-        }
-
-        span img {
-            height: 1.25rem;
-            width: auto;
+            border-radius: 50%;
+            overflow: hidden;
         }
 
         .profile-pic img {
@@ -70,40 +150,26 @@
             object-fit: cover;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1.25rem;
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 400;
-            transition: opacity 0.3s ease;
-        }
-
-        .social-links a:hover {
-            opacity: 0.6;
+        span img {
+            height: 1.25rem;
+            width: auto;
         }
 
         .sidebar-content {
             flex: 1;
+            overflow-y: auto;
+            min-height: 0;
         }
 
         .tagline {
-            font-family: 'Geist', sans-serif;
             font-size: 14px;
             line-height: 1.6;
             font-weight: 500;
             margin-bottom: 1rem;
-            letter-spacing: 0;
             color: var(--text-dark);
         }
 
         .description {
-            font-family: 'Geist', sans-serif;
             font-size: 14px;
             line-height: 1.6;
             font-weight: 400;
@@ -111,33 +177,8 @@
             margin-bottom: 1rem;
         }
 
-        .pricing {
-            margin-bottom: 2rem;
-        }
-
-        .pricing-text {
-            font-size: 14px;
-            margin-bottom: 0;
-        }
-
-        .pricing-text strong {
-            font-weight: 600;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.5;
-            }
-        }
-
         .cta-button {
-            background: #007AFF;
+            background: var(--accent-blue);
             color: #fff;
             border: none;
             padding: 0.85rem 2rem;
@@ -150,6 +191,7 @@
             width: 100%;
             letter-spacing: 0.01em;
             box-shadow: inset 0 1px 6px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 122, 255, 0.2);
+            margin-top: 0.5rem;
         }
 
         .cta-button:hover {
@@ -162,11 +204,11 @@
             box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.25), 0 2px 6px rgba(0, 122, 255, 0.15);
         }
 
-        /* Client Logos - Bottom of Sidebar */
         .clients-section {
             margin-top: auto;
             padding-top: 2rem;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .clients-label {
@@ -187,7 +229,6 @@
         }
 
         .client-logo {
-            font-family: 'Geist', sans-serif;
             font-size: 0.85rem;
             font-weight: 600;
             opacity: 0.7;
@@ -210,12 +251,11 @@
             }
         }
 
-        /* Right Content Area - Scrollable */
         .content {
-            margin-left: 24%;
-            min-height: 100vh;
-            padding: 1rem 3rem;
-            background: #FAF8F2;
+            height: 100%;
+            overflow-y: auto;
+            padding: 1.25rem 1.5rem 1.25rem 1rem;
+            background: var(--panel-bg);
         }
 
         .work-grid {
@@ -225,20 +265,11 @@
 
         .work-item {
             position: relative;
-            border-radius: 0;
             overflow: hidden;
-            /* cursor: pointer; */
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
+            border-radius: 0;
         }
-
-        /* .work-item:hover .work-image {
-            transform: scale(1.02);
-        }
-
-        .work-item:hover .work-overlay {
-            opacity: 1;
-        } */
 
         .work-item:nth-child(1) {
             animation-delay: 0.1s;
@@ -268,7 +299,6 @@
             height: auto;
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s ease;
         }
 
         .work-image img {
@@ -278,134 +308,318 @@
             display: block;
         }
 
-        .work-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 60%, transparent 100%);
-            padding: 3rem 2rem 2rem;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        /* —— Case Studies —— */
+        .case-studies-panel {
+            background: var(--panel-bg);
+            border-radius: 20px;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 2.5rem 0 3rem;
         }
 
-        .work-category {
+        .case-studies-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+        }
+
+        .case-studies-title {
             font-family: 'Geist', sans-serif;
-            font-size: 0.85rem;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 1.75rem;
+            color: #0F172A;
+        }
+
+        .case-study {
+            margin-bottom: 2.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            width: 100%;
+            text-align: left;
+            font: inherit;
+            display: block;
+        }
+
+        .case-study-thumb {
+            width: 100%;
+            aspect-ratio: auto;
+            background: var(--placeholder);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .case-study-thumb:not(:has(img)) {
+            aspect-ratio: 16 / 9;
+        }
+
+        .case-study-thumb img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .case-study-desc {
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.65;
+            color: #475569;
+            max-width: 36rem;
+        }
+
+        .case-studies-soon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-top: 3.5rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #475569;
+        }
+
+        .case-studies-soon svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .case-study:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+
+        /* —— Case study detail —— */
+        .cs-panel {
+            background: var(--panel-bg);
+            border-radius: 20px;
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            padding: 1.75rem 0 4rem;
+        }
+
+        .cs-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .cs-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 1.75rem;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #475569;
+        }
+
+        .cs-back svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        .cs-back:hover {
+            color: #0F172A;
+        }
+
+        .cs-title {
+            font-family: 'Geist', sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: #0F172A;
+            margin-bottom: 1.25rem;
+        }
+
+        .cs-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.75rem;
+            margin-bottom: 0.85rem;
+            font-family: 'Geist', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: #475569;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.02em;
+        }
+
+        .cs-meta strong {
+            font-weight: 500;
+            color: #444444;
+            margin-right: 0.35rem;
+        }
+
+        .cs-website {
+            font-family: 'Geist', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #475569;
+            margin-bottom: 1.25rem;
+        }
+
+        .cs-website a {
+            color: #007AFF;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .cs-figure {
+            width: 100%;
+            aspect-ratio: 680 / 494;
+            background: #FAF8F2;
+            border-radius: 0;
+            margin: 1.25rem 0;
+            overflow: hidden;
+        }
+
+        .cs-figure:has(img),
+        .cs-figure:has(video) {
+            aspect-ratio: auto;
+            height: auto;
+            background: transparent;
+        }
+
+        .cs-figure img,
+        .cs-figure video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cs-figure img {
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .cs-figure video {
+            object-fit: cover;
+            transform: scale(1.02);
+            transform-origin: center center;
+        }
+
+        .cs-outcome {
+            font-family: 'Geist', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin: 0.25rem 0 2rem;
+        }
+
+        .cs-outcome strong {
+            font-weight: 500;
+            color: #444444;
+            margin-right: 0.35rem;
+        }
+
+        .cs-section {
+            margin-top: 1rem;
             margin-bottom: 0.5rem;
         }
 
-        .work-title {
+        .cs-section-title {
             font-family: 'Geist', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
+            font-size: 18px;
+            font-weight: 500;
+            color: #0F172A;
+            margin-bottom: 0.5rem;
         }
 
-        .work-description {
+        .cs-body {
             font-family: 'Geist', sans-serif;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: #475569;
+            margin-bottom: 1.25rem;
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
-            .sidebar {
-                width: 32%;
-                padding: 2.5rem 2rem;
-            }
-
-            .content {
-                margin-left: 32%;
-                padding: 1rem;
-            }
-
-            .tagline {
-                font-size: 16px;
-            }
-
-            .description {
-                font-size: 14px;
+            .home-shell {
+                grid-template-columns: minmax(260px, 34%) 1fr;
             }
         }
 
         @media (max-width: 968px) {
+            .home-shell {
+                grid-template-columns: minmax(240px, 38%) 1fr;
+            }
+
             .sidebar {
-                width: 38%;
-                padding: 2rem 1.5rem;
+                padding: 1.5rem;
             }
-
-            .content {
-                margin-left: 38%;
-                padding: 0.5rem;
-            }
-
-            .work-grid {
-                gap: 0.5rem;
-            }
-
-            .tagline {
-                font-size: 14px;
-                line-height: 1.5;
-            }
-
-            .description {
-                font-size: 13px;
-            }
-
-            .pricing-text {
-                font-size: 0.9rem;
-            }
-
-            .cta-button {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.85rem;
-            }
-
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
+            body {
+                overflow: auto;
                 height: auto;
-                padding: 2rem 1.5rem;
+            }
+
+            .page {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .site-nav {
+                justify-content: flex-end;
+                padding: 0.25rem 0;
+            }
+
+            .view.active {
+                display: flex;
+                height: auto;
+            }
+
+            .home-shell {
+                display: flex;
+                flex-direction: column;
+                height: auto;
+                min-height: 0;
+            }
+
+            .sidebar {
+                height: auto;
+                overflow: visible;
             }
 
             .content {
-                margin-left: 0;
-                padding: 0.25rem;
+                height: auto;
+                overflow: visible;
             }
 
-            .work-grid {
-                gap: 0.25rem;
+            .case-studies-panel {
+                height: auto;
+                min-height: 70vh;
+                padding-top: 1.5rem;
             }
 
-            .work-item {
-                border-radius: 0;
+            .nav-link .nav-label {
+                display: none;
             }
 
-            .clients-marquee {
-                animation: scroll 15s linear infinite;
+            .nav-link {
+                padding: 0.5rem;
             }
-
-            .tagline {
-                font-size: 16px;
-            }
-
-            .description {
-                font-size: 14px;
-            }
-
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -426,198 +640,415 @@
 </head>
 
 <body>
-    <!-- Fixed Left Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <div class="profile-pic">
-                <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778222770/new_website_dp_twwgui.png"
-                    alt="Udhaya">
+    <div class="page">
+    <nav class="site-nav" aria-label="Primary">
+        <button type="button" class="nav-link active" data-view="home" id="nav-home">
+            <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 256 256" fill="currentColor"><path d="M222.14,105.85l-80-80a20,20,0,0,0-28.28,0l-80,80A19.86,19.86,0,0,0,28,120v96a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V164h24v52a12,12,0,0,0,12,12h64a12,12,0,0,0,12-12V120A19.86,19.86,0,0,0,222.14,105.85ZM204,204H164V152a12,12,0,0,0-12-12H104a12,12,0,0,0-12,12v52H52V121.65l76-76,76,76Z"/></svg>
+            </span>
+            <span class="nav-label">Home</span>
+        </button>
+        <button type="button" class="nav-link" data-view="case-studies" id="nav-case-studies">
+            <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,20H72A36,36,0,0,0,36,56V224a12,12,0,0,0,12,12H192a12,12,0,0,0,0-24H60v-4a12,12,0,0,1,12-12H208a12,12,0,0,0,12-12V32A12,12,0,0,0,208,20ZM196,172H72a35.59,35.59,0,0,0-12,2.06V56A12,12,0,0,1,72,44H196Z"/></svg>
+            </span>
+            <span class="nav-label">Case Studies</span>
+        </button>
+        <a class="nav-link" href="https://x.com/Udhayya_" target="_blank" rel="noopener noreferrer">
+            <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 256 256" fill="currentColor"><path d="M218.12,209.56l-61-95.8,59.72-65.69a12,12,0,0,0-17.76-16.14L143.81,92.77,106.12,33.56A12,12,0,0,0,96,28H48A12,12,0,0,0,37.88,46.44l61,95.8L39.12,207.93a12,12,0,1,0,17.76,16.14l55.31-60.84,37.69,59.21A12,12,0,0,0,160,228h48a12,12,0,0,0,10.12-18.44ZM166.59,204,69.86,52H89.41l96.73,152Z"/></svg>
+            </span>
+            <span class="nav-label">Twitter(X)</span>
+        </a>
+        <a class="nav-link" href="https://www.linkedin.com/in/udhaya-705b081a1/" target="_blank"
+            rel="noopener noreferrer">
+            <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,20H40A20,20,0,0,0,20,40V216a20,20,0,0,0,20,20H216a20,20,0,0,0,20-20V40A20,20,0,0,0,216,20Zm-4,192H44V44H212ZM112,176V120a12,12,0,0,1,21.43-7.41A40,40,0,0,1,192,148v28a12,12,0,0,1-24,0V148a16,16,0,0,0-32,0v28a12,12,0,0,1-24,0ZM96,120v56a12,12,0,0,1-24,0V120a12,12,0,0,1,24,0ZM68,80A16,16,0,1,1,84,96,16,16,0,0,1,68,80Z"/></svg>
+            </span>
+            <span class="nav-label">Linkedin</span>
+        </a>
+    </nav>
+
+    <!-- Home -->
+    <div class="view active" id="view-home" data-view-panel="home">
+        <div class="home-shell">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <div class="profile-pic">
+                        <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778222770/new_website_dp_twwgui.png"
+                            alt="Udhaya">
+                    </div>
+                </div>
+
+                <div class="sidebar-content">
+                    <h1 class="tagline">I'm Udhaya, product designer partner for early stage B2B & AI Product</h1>
+
+                    <p class="description">I've spent more time understanding complex systems and the people inside them
+                        than polishing interfaces.</p>
+
+                    <p class="description">I work closely with engineers to make sure designs are buildable from the
+                        start and look the same when they ship.</p>
+
+                    <p class="description">Product design, landing pages, and GTM assets for early teams who move fast
+                    </p>
+
+                    <button class="cta-button" data-cal-link="udhaya/30min"
+                        data-cal-config='{"layout":"month_view"}'>Book a free strategy call</button>
+                </div>
+
+                <div class="clients-section">
+                    <div class="clients-label">Worked with</div>
+                    <div class="clients-marquee">
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225143_qzvbol.png"
+                                alt="ibizo"></span>
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225144_lgaqqi.png"
+                                alt="BREATHE ESG"></span>
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225145_cxiteh.png"
+                                alt="compuz"></span>
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225146_vwymfx.png"
+                                alt="Cloudify"></span>
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225147_vlcaic.png"
+                                alt="celetel"></span>
+                        <span class="client-logo"><img
+                                src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225148_tgw7nt.png"
+                                alt="nano"></span>
+                        <!-- Duplicate for seamless loop -->
+                        <span class="client-logo">ibizo</span>
+                        <span class="client-logo">BREATHE ESG</span>
+                        <span class="client-logo">compuz</span>
+                        <span class="client-logo">Cloudify</span>
+                        <span class="client-logo">.cek</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content">
+                <div class="work-grid">
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333111/Desktop_-_35_nae7wn.png"
+                                alt="Claritas — Action items dashboard">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333708/Frame_214787240075_zsqogh.png"
+                                alt="Breathe ESG — Vault file manager">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778336721/Desktop_-_52_po7gel.png"
+                                alt="Breathe ESG — Multi million dollar funding round">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/65375634575473_zcpcot.png"
+                                alt="Approve — Approvals landing page">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/Cosmic_576648night_kbnrp2.png"
+                                alt="Fynlo — Vendor payments dashboard">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339085/67747647_qgzvix.png"
+                                alt="Approve — Purchase requests dashboard">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339086/Instagram_post_-_53_z8n1jw.png"
+                                alt="AI CFO — Mobile finance assistant">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339927/Desktop_-6_45_ms3o5r.png"
+                                alt="Momentum — Sales inbox landing page">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339474/Frame_2147e239263_znjgpd.png"
+                                alt="Breathe ESG — Emissions overview dashboard">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339475/Frame_21472y39641_jhwtp2.png"
+                                alt="Breathe Zero — CO2 emissions dashboard">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339476/Desktop_-_5_1_w6qeba.png"
+                                alt="Breathe ESG — Gap analysis with Inara AI">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778340369/Instagram_poswwwt_-_102333_c9bdl5.png"
+                                alt="Mobile apps — CFO, Sales dashboard & Pipeline analytics">
+                        </div>
+                    </article>
+
+                    <article class="work-item">
+                        <div class="work-image">
+                            <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778430457/Desktop_-_553_gwucar.png"
+                                alt="Claritas — Customer chaos to product clarity">
+                        </div>
+                    </article>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Case Studies -->
+    <div class="view" id="view-case-studies" data-view-panel="case-studies" hidden>
+        <div class="case-studies-panel">
+            <div class="case-studies-inner">
+                <h2 class="case-studies-title">Selected Work</h2>
+
+                <button type="button" class="case-study" data-view="case-study-1">
+                    <div class="case-study-thumb">
+                        <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787844351/Frame_2147242438_nbxkig.png"
+                            alt="Breathe ESG AI tool case study">
+                    </div>
+                    <p class="case-study-desc">Designed an AI tool free enough to try, sharp enough to convert. Demo
+                        conversion jumped almost 3x compared to normal site visitors.</p>
+                </button>
+
+                <button type="button" class="case-study" data-view="case-study-2">
+                    <div class="case-study-thumb">
+                        <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787847967/Frame_2147242453_wujyc4.png"
+                            alt="Breathe ESG brand identity case study">
+                    </div>
+                    <p class="case-study-desc">Designed an identity grounded in data, not dressed up in AI clichés.
+                        That distinction is what got us taken seriously against bigger, louder competitors.</p>
+                </button>
+
+                <p class="case-studies-soon">
+                    <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M252,120a52.06,52.06,0,0,0-52-52H160.32c-3.44-.21-52.6-4-99.46-43.3A20,20,0,0,0,28,40V200a19.8,19.8,0,0,0,11.54,18.12,19.86,19.86,0,0,0,21.32-2.81A192.92,192.92,0,0,1,144,174.47v26.2a20,20,0,0,0,8.9,16.64,11.35,11.35,0,0,0,1.39.8l14.44,7.06A20,20,0,0,0,198.37,213l11.09-41.82A52.07,52.07,0,0,0,252,120ZM52,191.63V48.4c36.17,28.07,72.17,38.1,92,41.66V150C124.17,153.52,88.17,163.55,52,191.63ZM176.39,202.2,168,198.1V172h16.4ZM200,148H168V92h32a28,28,0,1,1,0,56Z"/></svg>
+                    More coming soon
+                </p>
             </div>
         </div>
+    </div>
 
-        <div class="sidebar-content">
-            <h1 class="tagline">I'm Udhaya, product designer partner for early stage B2B & AI Product</h1>
+    <!-- Case Study 1 -->
+    <div class="view" id="view-case-study-1" data-view-panel="case-study-1" hidden>
+        <div class="cs-panel">
+            <div class="cs-inner">
+                <button type="button" class="cs-back" data-view="case-studies">
+                    <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H69l51.52,51.51a12,12,0,0,1-17,17l-72-72a12,12,0,0,1,0-17l72-72a12,12,0,0,1,17,17L69,116H216A12,12,0,0,1,228,128Z"/></svg>
+                    Back to case studies
+                </button>
 
-            <p class="description">I've spent more time understanding complex systems and the people inside them than polishing interfaces.</p>
+                <h1 class="cs-title">Designed an AI tool free enough to try, sharp enough to convert. Demo conversion jumped almost 3x compared to normal site visitors.</h1>
 
-            <p class="description">I work closely with engineers to make sure designs are buildable from the start and look the same when they ship.</p>
+                <div class="cs-meta">
+                    <span><strong>ROLE:</strong> PRODUCT DESIGN, GROWTH STRATEGY</span>
+                    <span><strong>Focus</strong> AI-LED ACQUISITION</span>
+                </div>
 
-            <p class="description">Product design, landing pages, and GTM assets for early teams who move fast</p>
+                <!-- Image 1: Hero — screen animation -->
+                <div class="cs-figure" data-cs-image="cs1-01-hero" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="auto" width="676" height="490"
+                        src="https://res.cloudinary.com/deznuknel/video/upload/c_crop,w_1352,h_980,x_4,y_4/v1788024117/Slide_2_gl26jf.mp4"></video>
+                </div>
 
-            <div class="social-links">
-                <a href="https://x.com/Udhayya_" target="_blank">Twitter</a>
-                <a href="https://www.linkedin.com/in/udhaya-705b081a1/" target="_blank">Linkedin</a>
+                <p class="cs-outcome"><strong>OUTCOME:</strong> LEAD QUALITY, PRICING POWER, TOP LINE GROWTH</p>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Overview</h2>
+                    <p class="cs-body">Breathe ESG's biggest drop-off wasn't at signup, it was before it. Visitors would land on the site, read about GHG calculations and gap analysis, and leave without ever touching the product. ESG software has a long, trust-heavy sales cycle, and nobody converts off a features page alone. So the brief for me wasn't "get more signups." It was "give people a reason to sign up in the first place."</p>
+                </section>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">A Low Friction Ask, Right at the Door</h2>
+                    <p class="cs-body">Clicking "Try our AI" takes visitors straight to a short signup screen: name, company, email, and industry. That's it. It's positioned as the last step before using something free, not as a purchase decision, so the friction is minimal even though we're asking for real information upfront. Once that's filled in, they're straight into the tool with their free credits, no waiting, no sales call in between.</p>
+                </section>
+
+                <!-- Image 2: After low-friction ask -->
+                <div class="cs-figure" data-cs-image="cs1-02-signup-flow">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787844356/Frame_2147242453_wewydw.png"
+                        alt="Breathe ESG signup and product experience">
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Free credits, but the tool behaves like the real product</h2>
+                    <p class="cs-body">Once inside, the assistant runs actual gap analysis against reporting frameworks and can take a company's raw emissions data and calculate real numbers. It's not a scripted demo. The credit limit exists to keep it free to try, not to water down what it does, because the whole point of asking for details upfront was that the experience afterward had to be worth it.</p>
+                </section>
+
+                <!-- Image 3: Free credits / scanning -->
+                <div class="cs-figure" data-cs-image="cs1-03-free-credits">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787844350/Frame_2147242453-1_n8ecnh.png"
+                        alt="Breathe ESG free credits AI audit experience">
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Every Signup Is a Lead Before They've Even Used the Tool</h2>
+                    <p class="cs-body">Because the details are collected before anyone touches the AI, every completed signup is a lead the moment it lands, whether or not that visitor ever converts to paid. Sales gets a name, a company, an industry, and a way to reach out, without waiting for a demo request or a "book a call" click. It turns a simple free trial gate into a steady stream of qualified contacts on its own.</p>
+                </section>
+
+                <!-- Image 4: Gap analysis result -->
+                <div class="cs-figure" data-cs-image="cs1-04-gap-analysis">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787844350/Frame_2147242453-2_ra1ees.png"
+                        alt="Breathe ESG gap analysis result">
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">From Trying It to Trusting It</h2>
+                    <p class="cs-body">The people who go on to upgrade are the ones who ran their actual numbers through the free tool and got something useful back. By the time credits run out, they're not deciding whether the product works, they already know. The upgrade prompt just has to show up at the right moment, right as they're mid-analysis and want to keep going.</p>
+                </section>
+
+                <!-- Image 5: GHG baseline -->
+                <div class="cs-figure" data-cs-image="cs1-05-ghg-baseline">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787844351/Frame_2147242453-3_teiirn.png"
+                        alt="Breathe ESG GHG emissions baseline">
+                </div>
+
+                <p class="cs-body">Since launch, free-tool visitors have converted to qualified demo requests at nearly 3x the rate of untouched site traffic, and a meaningful share convert directly to paid seats without a sales call at all.</p>
             </div>
-
-            <button class="cta-button" data-cal-link="udhaya/30min" data-cal-config='{"layout":"month_view"}'>Book a free strategy call</button>
         </div>
+    </div>
 
-        <div class="clients-section">
-            <div class="clients-label">Worked with</div>
-            <div class="clients-marquee">
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225143_qzvbol.png"
-                        alt="ibizo"></span>
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225144_lgaqqi.png"
-                        alt="BREATHE ESG"></span>
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225145_cxiteh.png"
-                        alt="compuz"></span>
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225146_vwymfx.png"
-                        alt="Cloudify"></span>
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225147_vlcaic.png"
-                        alt="celetel"></span>
-                <span class="client-logo"><img
-                        src="https://res.cloudinary.com/deznuknel/image/upload/v1771586526/Frame_2147225148_tgw7nt.png"
-                        alt="nano"></span>
-                <!-- Duplicate for seamless loop -->
-                <span class="client-logo">ibizo</span>
-                <span class="client-logo">BREATHE ESG</span>
-                <span class="client-logo">compuz</span>
-                <span class="client-logo">Cloudify</span>
-                <span class="client-logo">.cek</span>
+    <!-- Case Study 2 -->
+    <div class="view" id="view-case-study-2" data-view-panel="case-study-2" hidden>
+        <div class="cs-panel">
+            <div class="cs-inner">
+                <button type="button" class="cs-back" data-view="case-studies">
+                    <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M228,128a12,12,0,0,1-12,12H69l51.52,51.51a12,12,0,0,1-17,17l-72-72a12,12,0,0,1,0-17l72-72a12,12,0,0,1,17,17L69,116H216A12,12,0,0,1,228,128Z"/></svg>
+                    Back to case studies
+                </button>
+
+                <h1 class="cs-title">Designed an identity grounded in data, not dressed up in AI clichés. That distinction is what got us taken seriously against bigger and louder competitors.</h1>
+
+                <div class="cs-meta">
+                    <span><strong>ROLE:</strong> VISUAL IDENTITY, BRAND STRATEGY, WEB DESIGN</span>
+                    <span><strong>Focus</strong> BRAND IDENTITY, AI POSITIONING</span>
+                </div>
+
+                <p class="cs-website">Website link: <a href="https://breatheesg.com" target="_blank" rel="noopener noreferrer">breatheesg.com</a></p>
+
+                <!-- Image 1: Hero — screen animation -->
+                <div class="cs-figure" data-cs-image="cs2-01-hero" aria-hidden="true">
+                    <video autoplay muted loop playsinline preload="auto" width="676" height="490"
+                        src="https://res.cloudinary.com/deznuknel/video/upload/c_crop,w_1352,h_980,x_4,y_4/v1788024177/Slide_1_kiunt1.mp4"></video>
+                </div>
+
+                <p class="cs-outcome"><strong>OUTCOME:</strong> MARKET DISTINCTION, BRAND CREDIBILITY, TOP LINE GROWTH</p>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Overview</h2>
+                    <p class="cs-body">Breathe ESG's identity hadn't caught up with what the company had actually become. The old site read like every other ESG SaaS tool, clean, generic, forgettable. And the newer AI-branded competitors all leaned on the same look: glowing orbs, gradient blur, a chatbot bubble. That look says "we bolted AI onto our product." It's the opposite of what actually makes Breathe ESG's model work. The AI is only as good as the client's own granular data sitting underneath it, so there's nothing generic about the output. I needed the brand to make that argument before a single word of copy did.</p>
+                </section>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">A Palette With Meaning</h2>
+                    <p class="cs-body">Green and blue for sustainability, purple for what sits on top of it. Color carries the same logic as the rest of the system. Green and blue anchor the brand in sustainability, familiar, credible, not trying too hard. Purple is reserved specifically for AI-touched moments, so it reads as a distinct layer sitting on top of the sustainability core rather than blending into it. The palette itself tells you which part of the product you're looking at.</p>
+                </section>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Data Weaving as a Visual Language</h2>
+                    <p class="cs-body">Pixels as thread, thread as structure. The core visual system is built around a "data weaving" concept, individual pixels behaving like threads that pull together into structure, mirroring how raw, scattered client data gets organized into something coherent the model can actually reason over. It shows up as an animated motif across the site: fragments assembling into form on scroll, patterns that tighten as you move deeper into the product story. It's a literal picture of the pitch, disparate data, woven into intelligence.</p>
+                </section>
+
+                <!-- Image 2: Data weaving cards -->
+                <div class="cs-figure" data-cs-image="cs2-02">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787847966/Frame_2147242451_baym7w.png"
+                        alt="Breathe ESG data weaving visual system">
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">From Generic AI to Grounded Intelligence</h2>
+                    <p class="cs-body">The identity had to argue a point, not just look nice. Every AI-branded product right now reaches for the same visual language, which means it's stopped meaning anything. That's a real problem for a company whose whole differentiator is the opposite of generic, the AI is only as good as the client's own data underneath it. So my brief to myself wasn't "look like an AI company," it was "make the data visible," so the AI reads as an output of real, specific information rather than a generic layer sitting on top of it.</p>
+                </section>
+
+                <!-- Image 3: Brand identity in context -->
+                <div class="cs-figure" data-cs-image="cs2-03">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787847974/Frame_2147242453-1_dcj1dk.png"
+                        alt="Breathe ESG brand identity in context">
+                </div>
+
+                <!-- Image 4: Brand application -->
+                <div class="cs-figure" data-cs-image="cs2-04">
+                    <img src="https://res.cloudinary.com/deznuknel/image/upload/f_png,q_100/v1787847966/Frame_2147242453-2_oka8ea.png"
+                        alt="Breathe ESG palette and brand application">
+                </div>
+
+                <section class="cs-section">
+                    <h2 class="cs-section-title">Taken Seriously</h2>
+                    <p class="cs-body">The distinction became the differentiator. Applied consistently across the entire site, typography, motion, iconography, and the weaving motif carried from the homepage through product pages, the identity stopped reading as "another AI tool" and started reading as a company built on its own infrastructure. That distinction is what mattered against bigger, louder AI-branded competitors. It's not a bolder look, it's a different claim.</p>
+                </section>
             </div>
         </div>
-    </aside>
-
-    <!-- Scrollable Right Content -->
-    <main class="content">
-        <div class="work-grid">
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333111/Desktop_-_35_nae7wn.png"
-                        alt="Claritas — Action items dashboard">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778333708/Frame_214787240075_zsqogh.png"
-                        alt="Breathe ESG — Vault file manager">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778336721/Desktop_-_52_po7gel.png"
-                        alt="Breathe ESG — Multi million dollar funding round">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/65375634575473_zcpcot.png"
-                        alt="Approve — Approvals landing page">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339084/Cosmic_576648night_kbnrp2.png"
-                        alt="Fynlo — Vendor payments dashboard">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339085/67747647_qgzvix.png"
-                        alt="Approve — Purchase requests dashboard">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339086/Instagram_post_-_53_z8n1jw.png"
-                        alt="AI CFO — Mobile finance assistant">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339927/Desktop_-6_45_ms3o5r.png"
-                        alt="Momentum — Sales inbox landing page">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339474/Frame_2147e239263_znjgpd.png"
-                        alt="Breathe ESG — Emissions overview dashboard">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339475/Frame_21472y39641_jhwtp2.png"
-                        alt="Breathe Zero — CO2 emissions dashboard">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778339476/Desktop_-_5_1_w6qeba.png"
-                        alt="Breathe ESG — Gap analysis with Inara AI">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778340369/Instagram_poswwwt_-_102333_c9bdl5.png"
-                        alt="Mobile apps — CFO, Sales dashboard & Pipeline analytics">
-                </div>
-            </article>
-
-            <article class="work-item">
-                <div class="work-image">
-                    <img src="https://res.cloudinary.com/deznuknel/image/upload/v1778430457/Desktop_-_553_gwucar.png"
-                        alt="Claritas — Customer chaos to product clarity">
-                </div>
-            </article>
-
-        </div>
-    </main>
+    </div>
+    </div>
 
     <script>
-        // Smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        const navButtons = document.querySelectorAll('.nav-link[data-view]');
+        const views = document.querySelectorAll('[data-view-panel]');
+        const caseStudyNav = ['case-studies', 'case-study-1', 'case-study-2'];
+
+        function showView(name) {
+            views.forEach((view) => {
+                const isActive = view.dataset.viewPanel === name;
+                view.classList.toggle('active', isActive);
+                view.hidden = !isActive;
             });
+            navButtons.forEach((btn) => {
+                const viewName = btn.dataset.view;
+                const isActive = viewName === name ||
+                    (viewName === 'case-studies' && caseStudyNav.includes(name));
+                btn.classList.toggle('active', isActive);
+            });
+            window.scrollTo(0, 0);
+            document.querySelectorAll('.content, .case-studies-panel, .cs-panel').forEach((el) => {
+                el.scrollTop = 0;
+            });
+        }
+
+        document.querySelectorAll('[data-view]').forEach((el) => {
+            el.addEventListener('click', () => showView(el.dataset.view));
         });
 
-        const marquee = document.querySelector('.clients-marquee');
-
-        // Add intersection observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.work-item').forEach(item => {
-            observer.observe(item);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
+
+        document.querySelectorAll('.work-item').forEach((item) => observer.observe(item));
     </script>
 
-    <!-- Cal.com embed -->
     <script type="text/javascript">
         (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
         Cal("init", { origin: "https://cal.com" });
